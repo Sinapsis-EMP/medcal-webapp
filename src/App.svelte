@@ -1,3 +1,26 @@
+<script>
+  import { FirebaseApp, User, Doc, Collection } from 'sveltefire';
+
+  import firebase from 'firebase/app';
+  import 'firebase/firestore';
+  import 'firebase/auth';
+  import 'firebase/performance';
+  import 'firebase/analytics';
+
+  let firebaseConfig = {
+    apiKey: 'AIzaSyDLjnjDgQe92lXVasJm_S7BXEzgOwFWUfM',
+    authDomain: 'marco-6beb1.firebaseapp.com',
+    databaseURL: 'https://marco-6beb1.firebaseio.com',
+    projectId: 'marco-6beb1',
+    storageBucket: 'marco-6beb1.appspot.com',
+    messagingSenderId: '877543684199',
+    appId: '1:877543684199:web:f382336f906065948bbcc2',
+    measurementId: 'G-S1TV8D7S1H',
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
 <style>
   main {
     text-align: center;
@@ -23,29 +46,6 @@
     }
   }
 </style>
-
-<script>
-  import { FirebaseApp, User, Doc, Collection } from "sveltefire";
-
-  import firebase from "firebase/app";
-  import "firebase/firestore";
-  import "firebase/auth";
-  import "firebase/performance";
-  import "firebase/analytics";
-
-  let firebaseConfig = {
-    apiKey: "AIzaSyDLjnjDgQe92lXVasJm_S7BXEzgOwFWUfM",
-    authDomain: "marco-6beb1.firebaseapp.com",
-    databaseURL: "https://marco-6beb1.firebaseio.com",
-    projectId: "marco-6beb1",
-    storageBucket: "marco-6beb1.appspot.com",
-    messagingSenderId: "877543684199",
-    appId: "1:877543684199:web:f382336f906065948bbcc2",
-    measurementId: "G-S1TV8D7S1H",
-  };
-
-  firebase.initializeApp(firebaseConfig);
-</script>
 
 <main>
 
@@ -73,11 +73,11 @@
       Howdy 😀! User
       <em>{user.uid}</em>
 
-      <button on:click="{() => auth.signOut()}">Sign Out</button>
+      <button on:click={() => auth.signOut()}>Sign Out</button>
 
       <div slot="signed-out">
 
-        <button on:click="{() => auth.signInAnonymously()}">
+        <button on:click={() => auth.signInAnonymously()}>
           Sign In Anonymously
         </button>
       </div>
@@ -85,12 +85,7 @@
       <hr />
 
       <!-- 3. 📜 Get a Firestore document owned by a user -->
-      <Doc
-        path="{`posts/${user.uid}`}"
-        let:data="{post}"
-        let:ref="{postRef}"
-        log
-      >
+      <Doc path={`posts/${user.uid}`} let:data={post} let:ref={postRef} log>
 
         <h2>{post.title}</h2>
 
@@ -102,11 +97,10 @@
         <span slot="loading">Loading post...</span>
         <span slot="fallback">
           <button
-            on:click="{() => postRef.set({
+            on:click={() => postRef.set({
                 title: '📜 I like Svelte',
                 createdAt: Date.now(),
-              })}"
-          >
+              })}>
             Create Document
           </button>
         </span>
@@ -115,12 +109,11 @@
 
         <h3>Comments</h3>
         <Collection
-          path="{postRef.collection('comments')}"
-          query="{(ref) => ref.orderBy('createdAt')}"
-          let:data="{comments}"
-          let:ref="{commentsRef}"
-          log
-        >
+          path={postRef.collection('comments')}
+          query={(ref) => ref.orderBy('createdAt')}
+          let:data={comments}
+          let:ref={commentsRef}
+          log>
 
           {#if !comments.length}No comments yet...{/if}
 
@@ -130,16 +123,15 @@
             </p>
             <p>
               {comment.text}
-              <button on:click="{() => comment.ref.delete()}">Delete</button>
+              <button on:click={() => comment.ref.delete()}>Delete</button>
             </p>
           {/each}
 
           <button
-            on:click="{() => commentsRef.add({
+            on:click={() => commentsRef.add({
                 text: '💬 Me too!',
                 createdAt: Date.now(),
-              })}"
-          >
+              })}>
             Add Comment
           </button>
 
