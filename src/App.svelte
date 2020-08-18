@@ -6,6 +6,8 @@
   import 'firebase/auth';
   import 'firebase/performance';
   import 'firebase/analytics';
+  import 'smelte/src/tailwind.css';
+  import Button from 'smelte/src/components/Button';
 
   let firebaseConfig = {
     apiKey: 'AIzaSyDLjnjDgQe92lXVasJm_S7BXEzgOwFWUfM',
@@ -77,9 +79,9 @@
 
       <div slot="signed-out">
 
-        <button on:click={() => auth.signInAnonymously()}>
+        <Button on:click={() => auth.signInAnonymously()}>
           Sign In Anonymously
-        </button>
+        </Button>
       </div>
 
       <hr />
@@ -128,13 +130,13 @@
             </p>
           {/each}
 
-          <button
+          <Button
             on:click={() => commentsRef.add({
                 text: '💬 Me ffffff!',
                 createdAt: Date.now(),
               })}>
             Add Comment
-          </button>
+          </Button>
 
           <span slot="loading">Loading comments...</span>
 
