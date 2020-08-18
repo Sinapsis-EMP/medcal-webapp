@@ -59,7 +59,7 @@
   {/if}
 
   <!-- 1. 🔥 Firebase App -->
-  <FirebaseApp firebase="firebase">
+  <FirebaseApp {firebase}>
 
     <h1>💪🔥 Mode Activated</h1>
 
@@ -119,7 +119,8 @@
 
           {#each comments as comment}
             <p>
-              <!-- ID: <em>{comment.ref.id}</em> -->
+              ID:v
+              <em>{comment.ref.id}</em>
             </p>
             <p>
               {comment.text}
@@ -129,7 +130,7 @@
 
           <button
             on:click={() => commentsRef.add({
-                text: '💬 Me too!',
+                text: '💬 Me ffffff!',
                 createdAt: Date.now(),
               })}>
             Add Comment
