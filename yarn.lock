@@ -336,6 +336,11 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@silintl/svelte-google-places-autocomplete@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@silintl/svelte-google-places-autocomplete/-/svelte-google-places-autocomplete-1.1.1.tgz#9e0a589a05c735281cc874e9dfc176e6b1c3c3dd"
+  integrity sha512-iDuSNQdnC1QpitqRvW7T6/lUi1z43qwodlvJkG3psEAz+TvjO58IdH0FdvZuREyPsp0c9UpAPJWrxHuZbZGHIA==
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
