@@ -1,7 +1,7 @@
 <script>
   import GooglePlacesAutocomplete from '@silintl/svelte-google-places-autocomplete';
   const options = {
-    fields: ['address_components', 'geometry', 'review', 'url'],
+    fields: ['address_components', 'geometry', 'review', 'type', 'url'],
     types: ['establishment'],
   };
   const placeholder = 'Destination city';
