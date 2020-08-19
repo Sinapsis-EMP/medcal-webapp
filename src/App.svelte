@@ -75,7 +75,8 @@
         let:data={institucion}
         let:ref={institucionRef}
         log>
-        Este es!!!
+
+        <div>La institución esd {institucion.url}</div>
         <span slot="loading">Cargando datos .t...</span>
         <span slot="fallback">
 
