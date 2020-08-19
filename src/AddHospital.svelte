@@ -1,17 +1,19 @@
 <script>
   import GooglePlacesAutocomplete from '@silintl/svelte-google-places-autocomplete';
   const options = {
-    fields: ['address_components', 'geometry'],
+    fields: ['address_components', 'geometry', 'review', 'url'],
     types: ['establishment'],
   };
   const placeholder = 'Destination city';
   const googlePlacesApiKey = 'AIzaSyCUPgy21XQ3YaF94LGU1Ap0w6ZcxvYxy5Y';
-  const onPlaceChanged = (place) => {
-    console.log('a', place);
+  const onPlaceChanged = (ev) => {
+    place = ev.detail.place;
   };
-  const onReady = (place) => {
-    console.log('a', place);
+  const onReady = (ev) => {
+    // console.log('a', pl);
   };
+
+  export let place;
 
   let locationName = ''; // localStorage.get('locationName') || '';
 </script>
