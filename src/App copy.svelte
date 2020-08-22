@@ -6,12 +6,6 @@
   import 'firebase/auth';
   import 'firebase/performance';
   import 'firebase/analytics';
-  import 'smelte/src/tailwind.css';
-  import TextField from 'smelte/src/components/TextField';
-
-  import Button from 'smelte/src/components/Button';
-  import AddHospital from './AddHospital.svelte';
-  import ListaInstituciones from './ListaInstituciones.svelte';
 
   let firebaseConfig = {
     apiKey: 'AIzaSyDLjnjDgQe92lXVasJm_S7BXEzgOwFWUfM',
@@ -23,26 +17,6 @@
     appId: '1:877543684199:web:f382336f906065948bbcc2',
     measurementId: 'G-S1TV8D7S1H',
   };
-
-  let lugar;
-  let comentario;
-  const instituciones = [
-    {
-      text: 'Item 1',
-      icon: 'favorite',
-      subheading: 'Subheading 1',
-    },
-    {
-      text: 'Item 2',
-      icon: 'favorite',
-      subheading: 'Subheading 2',
-    },
-    {
-      text: 'Item 3',
-      icon: 'favorite',
-      subheading: 'Subheading 3',
-    },
-  ];
 
   firebase.initializeApp(firebaseConfig);
 </script>
@@ -74,10 +48,6 @@
 </style>
 
 <main>
-  <h6 class="mb-3 mt-6">Basic</h6>
-  <TextField label="Test label" textarea bind:value={comentario} />
-
-  <AddHospital bind:place={lugar} />
 
   {#if !firebaseConfig.projectId}
     <strong>Step 0</strong>
@@ -91,60 +61,7 @@
   <!-- 1. 🔥 Firebase App -->
   <FirebaseApp {firebase}>
 
-    <Collection
-      path="instituciones"
-      query={(ref) => ref.orderBy('createdAt')}
-      let:data={instituciones}
-      let:ref={institucionesRef}
-      log>
-
-      {#if !instituciones.length}No hay instituciones...{/if}
-
-      <ListaInstituciones {instituciones} />
-
-      <!-- <Button
-      on:click={() => commentsRef.add({
-          text: comentario,
-          createdAt: Date.now(),
-          lugar: lugar.url,
-        })}>
-      Add Comment
-    </Button> -->
-
-      <span slot="loading">Cargando instituciones...</span>
-
-    </Collection>
-
-    {#if lugar}
-      El usuario ya eligió lugar, entonces ya podemos creart el doc. en Firebase
-      <Doc
-        path={`instituciones/${lugar.url.replace(/\//g, '')}`}
-        let:data={institucion}
-        let:ref={institucionRef}
-        log>
-
-        <div>La institución esd {institucion.url}</div>
-        <span slot="loading">Cargando datos .t...</span>
-        <span slot="fallback">
-
-          <br />
-          <Button
-            on:click={() => {
-              console.log(lugar);
-              institucionRef.set({
-                createdAt: Date.now(),
-                types: lugar.types,
-                url: lugar.url,
-              });
-            }}>
-            Create Institución
-          </Button>
-        </span>
-
-      </Doc>
-    {/if}
-
-    <h1>💪🔥 Mode ctivated</h1>
+    <h1>💪🔥 Mode Activated</h1>
 
     <p>
       <strong>Tip:</strong>
@@ -159,14 +76,15 @@
       <button on:click={() => auth.signOut()}>Sign Out</button>
 
       <div slot="signed-out">
-        <Button on:click={() => auth.signInAnonymously()}>
+
+        <button on:click={() => auth.signInAnonymously()}>
           Sign In Anonymously
-        </Button>
+        </button>
       </div>
 
       <hr />
-      <!-- 3. 📜 Get a Firestore document owned by a user -->
 
+      <!-- 3. 📜 Get a Firestore document owned by a user -->
       <Doc path={`posts/${user.uid}`} let:data={post} let:ref={postRef} log>
 
         <h2>{post.title}</h2>
@@ -210,14 +128,13 @@
             </p>
           {/each}
 
-          <Button
+          <button
             on:click={() => commentsRef.add({
-                text: comentario,
+                text: '💬 Me ffffff!',
                 createdAt: Date.now(),
-                lugar: lugar.url,
               })}>
             Add Comment
-          </Button>
+          </button>
 
           <span slot="loading">Loading comments...</span>
 
