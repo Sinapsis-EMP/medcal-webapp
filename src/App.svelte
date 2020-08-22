@@ -7,8 +7,11 @@
   import 'firebase/performance';
   import 'firebase/analytics';
   import 'smelte/src/tailwind.css';
+  import TextField from 'smelte/src/components/TextField';
+
   import Button from 'smelte/src/components/Button';
   import AddHospital from './AddHospital.svelte';
+  import ListaInstituciones from './ListaInstituciones.svelte';
 
   let firebaseConfig = {
     apiKey: 'AIzaSyDLjnjDgQe92lXVasJm_S7BXEzgOwFWUfM',
@@ -22,6 +25,24 @@
   };
 
   let lugar;
+  let comentario;
+  const instituciones = [
+    {
+      text: 'Item 1',
+      icon: 'favorite',
+      subheading: 'Subheading 1',
+    },
+    {
+      text: 'Item 2',
+      icon: 'favorite',
+      subheading: 'Subheading 2',
+    },
+    {
+      text: 'Item 3',
+      icon: 'favorite',
+      subheading: 'Subheading 3',
+    },
+  ];
 
   firebase.initializeApp(firebaseConfig);
 </script>
@@ -53,8 +74,11 @@
 </style>
 
 <main>
+  <h6 class="mb-3 mt-6">Basic</h6>
+  <TextField label="Test label" textarea bind:value={comentario} />
 
   <AddHospital bind:place={lugar} />
+  <ListaInstituciones {instituciones} />
 
   {#if !firebaseConfig.projectId}
     <strong>Step 0</strong>
@@ -83,9 +107,10 @@
           <br />
           <Button
             on:click={() => {
+              console.log(lugar);
               institucionRef.set({
                 createdAt: Date.now(),
-                type: lugar.url,
+                types: lugar.types,
                 url: lugar.url,
               });
             }}>
@@ -96,7 +121,7 @@
       </Doc>
     {/if}
 
-    <h1>💪🔥 Mode Activated</h1>
+    <h1>💪🔥 Mode ctivated</h1>
 
     <p>
       <strong>Tip:</strong>
@@ -164,8 +189,9 @@
 
           <Button
             on:click={() => commentsRef.add({
-                text: '💬 Me ffffff!',
+                text: comentario,
                 createdAt: Date.now(),
+                lugar: lugar.url,
               })}>
             Add Comment
           </Button>

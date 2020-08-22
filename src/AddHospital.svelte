@@ -18,9 +18,15 @@
   let locationName = ''; // localStorage.get('locationName') || '';
 </script>
 
+<style>
+  .ancho {
+    width: 5005px;
+  }
+</style>
+
 <GooglePlacesAutocomplete
   apiKey={googlePlacesApiKey}
-  class="form-control"
+  class="ancho"
   on:place_changed={onPlaceChanged}
   {options}
   on:ready={onReady}
