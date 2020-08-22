@@ -12,6 +12,7 @@
   import Button from 'smelte/src/components/Button';
   import AddHospital from './AddHospital.svelte';
   import ListaInstituciones from './ListaInstituciones.svelte';
+  import Layout from './Layout.svelte';
 
   let firebaseConfig = {
     apiKey: 'AIzaSyDLjnjDgQe92lXVasJm_S7BXEzgOwFWUfM',
@@ -74,6 +75,7 @@
 </style>
 
 <main>
+  <Layout />
   <h6 class="mb-3 mt-6">Basic</h6>
   <TextField label="Test label" textarea bind:value={comentario} />
 
@@ -118,7 +120,7 @@
     {#if lugar}
       El usuario ya eligió lugar, entonces ya podemos creart el doc. en Firebase
       <Doc
-        path={`instituciones/${lugar.url.replace(/\//g, '')}`}
+        path={`instituciones/${lugar.place_id}`}
         let:data={institucion}
         let:ref={institucionRef}
         log>
@@ -135,6 +137,11 @@
                 createdAt: Date.now(),
                 types: lugar.types,
                 url: lugar.url,
+                name: lugar.name,
+                icon: lugar.icon,
+                photos: lugar.photos.map((photo) => {
+                  return photo.getUrl();
+                }),
               });
             }}>
             Create Institución
